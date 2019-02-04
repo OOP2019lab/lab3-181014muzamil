@@ -9,7 +9,7 @@ struct gitHubUser{  //struct of github users
 	string userName;
 	string password;
 	string email;
-	string * gitHubFolders;
+	string * Folders;
         int    folderCount; 
         string * nameofins;
 	string * qualification;  
@@ -42,37 +42,36 @@ void output(gitHubUser * arr, int userCount)
 }
 
 //fucntion to read data
-void readDataFromFile( gitHubUser * users)
+void readDataFromFile( gitHubUser * usersarr)
 {
-	users=new gitHubUser[2];
+	usersarr=new gitHubUser[2];
 	ifstream fin;
 	fin.open("c:\\temp\\m.txt");
-	if(!fin)
+	if(fin.fail())
 	{
-		cout<<"Could not load File"<<endl;
-	
+		cout<<"Sorry we cant load file"<<endl;
 	}
 	else
 	{
-		int size=0;
+		int noofid=0;
 		int folder;
-		fin >> size;
-		for(int i=0;i<size;i++)
+		fin >> noofid;
+		for(int i=0;i<noofid;i++)
 		{
-			fin>>users[i].firstName;
-			fin>>users[i].userName;
-			fin>>users[i].email;
-			fin>>users[i].folderCount;
-			folder=users[i].folderCount;
-			users[i].gitHubFolders=new string[folder];
+			fin>>usersarr[i].firstName;
+			fin>>usersarr[i].userName;
+			fin>>usersarr[i].email;
+			fin>>usersarr[i].folderCount;
+			folder=usersarr[i].folderCount;
+			users[i].Folders=new string[folder];
 			fin.ignore();
 			for(int j=0;j<folder;j++)
 			{
-				getline(fin, users[i].gitHubFolders[j]);
+				getline(fin, usersarr[i].Folders[j]);
 			}
 		
 		}
-		output(users,size);
+		output(usersarr,noofid);
 	}
 }
 
